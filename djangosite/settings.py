@@ -10,7 +10,7 @@ if 'OPENSHIFT_REPO_DIR' in os.environ:
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = ('localhost', 'django.thevolny.net', 'django-thevolny.rhcloud.com', 'www.randomdick.pics')
+ALLOWED_HOSTS = ('localhost', 'python33-thevolny.rhcloud.com', 'www.randomdick.pics')
 
 INSTALLED_APPS = (
     'django.contrib.admin',
