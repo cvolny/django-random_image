@@ -7,7 +7,7 @@ from djangosite.settings import ON_OPENSHIFT
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djangosite.settings")
 
 if ON_OPENSHIFT:
-    sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi', 'openshift'))
+    sys.path.append(os.environ['OPENSHIFT_REPO_DIR'])
     virtenv = os.environ['APPDIR'] + '/virtenv/'
     os.environ['PYTHON_EGG_CACHE'] = os.path.join(virtenv, 'lib/python2.6/site-packages')
     virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
