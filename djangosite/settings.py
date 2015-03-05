@@ -3,9 +3,7 @@ import imp
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-if 'OPENSHIFT_REPO_DIR' in os.environ:
-    ON_OPENSHIFT = True
+ON_OPENSHIFT = 'OPENSHIFT_REPO_DIR' in os.environ
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
