@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% block page-title %}
+    #{{ object.id }}
+{% endblock %}
+{% block page_header %}
+    Random Dick Pic #{{ object.id }}!
+{% endblock %}
+{% block page_content %}
+    <div id="random_image_block" class="center-block">
+        <div id="image_wrapper">
+            <a href="/?prev={{ object.id }}">
+                {% thumbnail object.file "400" as img %}
+                <img id="random_image" src="{{ img.url }}" alt="{{ object.title }}" />
+                {% endthumbnail %}
+            </a>
+        </div>
+        <div id="caption_wrapper">
+            <a id="current" class="pull-right" href="/{{ object.id }}" title="permalink"><img src="{% static "icons/link.png" %}" alt="permalink" /></a>
+            <h2>{{ object.title }}</h2>
+        </div>
+    </div>
+{% endblock %}
