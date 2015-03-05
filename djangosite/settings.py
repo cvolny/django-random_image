@@ -1,6 +1,5 @@
 import os
 import imp
-from secret import SECRET_KEY
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -69,7 +68,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.environ.get('OPENSHIFT_DATA_DIR', os.path.join(BASE_DIR, 'media'))
 
 
-default_keys = {'SECRET_KEY': SECRET_KEY}
+default_keys = {'SECRET_KEY': 'z^jvcflogam45zw)+h*@nhh%$h#gnr!*agx_rkm=yfdl10(jtm'}
 use_keys = default_keys
 if ON_OPENSHIFT:
     imp.find_module('openshiftlibs')
