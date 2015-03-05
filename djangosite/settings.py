@@ -71,7 +71,6 @@ MEDIA_ROOT = os.environ.get('OPENSHIFT_DATA_DIR', os.path.join(BASE_DIR, 'media'
 default_keys = {'SECRET_KEY': 'z^jvcflogam45zw)+h*@nhh%$h#gnr!*agx_rkm=yfdl10(jtm'}
 use_keys = default_keys
 if ON_OPENSHIFT:
-    imp.find_module('openshiftlibs')
-    import openshiftlibs
+    import .openshiftlibs
     use_keys = openshiftlibs.openshift_secure(default_keys)
 SECRET_KEY = use_keys['SECRET_KEY']
