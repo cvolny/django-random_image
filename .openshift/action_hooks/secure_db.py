@@ -4,6 +4,7 @@ import imp
 import os
 import sqlite3
 
+sys.path.append(os.environ['OPENSHIFT_REPO_DIR'])
 # Load the openshift helper library
 lib_path      = os.environ['OPENSHIFT_REPO_DIR'] + 'wsgi/openshift/'
 modinfo       = imp.find_module('openshiftlibs', [lib_path])
