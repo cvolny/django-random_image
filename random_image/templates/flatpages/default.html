@@ -6,5 +6,5 @@
     {{ flatpage.title }}
 {% endblock %}
 {% block page_content %}
-    {{ flatpage.content }}
+    {{ flatpage.content | safe }}
 {% endblock %}
