@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import os
 import sys
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djangosite.settings")

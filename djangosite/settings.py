@@ -36,7 +36,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-WSGI_APPLICATION = 'djangosite.wsgi.application'
+WSGI_APPLICATION = 'wsgi.wsgi.application'
 ROOT_URLCONF = 'djangosite.urls'
 if ON_OPENSHIFT:
     DATABASES = {
@@ -66,7 +66,7 @@ USE_L10N = True
 USE_TZ = True
 USE_LIGHTBOX = True
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.environ.get('OPENSHIFT_REPO_DIR', BASE_DIR), 'static')
+STATIC_ROOT = os.path.join(os.environ.get('OPENSHIFT_REPO_DIR', BASE_DIR), 'wsgi', 'static')
 MEDIA_URL = '/static/media/'
 MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
 COMPRESS_ENABLED = not DEBUG
