@@ -11,7 +11,7 @@
     <div id="random_image_block" class="center-block">
         <div id="image_wrapper">
             <a href="/?prev={{ object.id }}">
-                {% thumbnail object.file "400" as img %}
+                {% thumbnail object.url "400" as img %}
                 <img id="random_image" src="{{ img.url }}" alt="{{ object.title }}" />
                 {% endthumbnail %}
             </a>
