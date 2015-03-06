@@ -1,0 +1,19 @@
+{% extends "admin/change_form.html" %}
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'admin/lightbox_extrahead.html' %}
+{% endblock %}
+{% block footer %}
+    {{ block.super }}
+    {% include "admin/lightbox_footer.html" %}
+    <script type="text/javascript">
+        jQuery('.field-url a').attr({
+            'data-lightbox': function() {
+                return jQuery(this).closest('fieldset').find('.field-id p').text();
+            },
+            'data-title': function() {
+                return jQuery("#id_title").val();
+            }
+        });
+    </script>
+{% endblock %}
