@@ -5,9 +5,10 @@ import imp
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ON_OPENSHIFT = 'OPENSHIFT_REPO_DIR' in os.environ
 
-DEBUG = True
+DEBUG = not ON_OPENSHIFT
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = ('localhost', 'python33-thevolny.rhcloud.com', 'www.randomdick.pics')
+COMPRESS_ENABLED = not DEBUG
+ALLOWED_HOSTS = ('localhost', 'python33-thevolny.rhcloud.com', 'randomdick.pics')
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -18,6 +19,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
+    'compressor',
+    'jquery',
+    'jquery_ui',
+    'jquery_lightbox',
     'sorl.thumbnail',
     'random_image',
 )
@@ -60,11 +65,16 @@ APPEND_SLASH = False
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+USE_LIGHTBOX = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.environ.get('OPENSHIFT_DATA_DIR', os.path.join(BASE_DIR, 'media'))
-
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 
 default_keys = {'SECRET_KEY': 'z^jvcflogam45zw)+h*@nhh%$h#gnr!*agx_rkm=yfdl10(jtm'}
 use_keys = default_keys

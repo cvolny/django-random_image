@@ -1,3 +1,9 @@
 Django==1.7
 Pillow==2.7.0
+django-appconf==1.0.1
+django-compressor==1.4
+django-jquery==1.9.1
+django-jquery-lightbox==2.6
+django-jquery-ui==1.10.3.1
+six==1.9.0
 sorl-thumbnail==12.2
