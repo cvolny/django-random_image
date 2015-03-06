@@ -5,8 +5,10 @@
 # could be python, php, ruby, etc.
 
 # Activate VirtualEnv in order to use the correct libraries
-if [ ! -d $OPENSHIFT_DATA_DIR/media ]; then
-    mkdir $OPENSHIFT_DATA_DIR/media
+if [ ! -d "$OPENSHIFT_DATA_DIR"media ]; then
+    echo MKDIR "$OPENSHIFT_DATA_DIR"media
+    mkdir "$OPENSHIFT_DATA_DIR"media
 fi
- 
-ln -sf $OPENSHIFT_DATA_DIR/media $OPENSHIFT_REPO_DIR/static/media
+
+echo SYMLINK /static/media
+ln -sf "$OPENSHIFT_DATA_DIR"media "$OPENSHIFT_REPO_DIR"static/media
