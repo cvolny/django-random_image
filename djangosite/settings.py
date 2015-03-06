@@ -24,6 +24,7 @@ INSTALLED_APPS = (
     'jquery_lightbox',
     'sorl.thumbnail',
     'random_image',
+    'randomdick',
 )
 
 MIDDLEWARE_CLASSES = (
