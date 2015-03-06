@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core import urlresolvers
 from django.contrib import admin
-from .models import RandomImage
+from .models import Image
 
 
 IMG_URL_ATTRS = 'target="_blank" data-pk="%s" data-title="%s"'
@@ -13,7 +13,7 @@ if settings.USE_LIGHTBOX:
     CHANGE_FORM_TEMPLATE = 'admin/lightbox_change_form.html'
 
 
-class RandomImageAdmin(admin.ModelAdmin):
+class ImageAdmin(admin.ModelAdmin):
     change_list_template = CHANGE_LIST_TEMPLATE
     change_form_template = CHANGE_FORM_TEMPLATE
     fields = ('id', 'user_link', 'title', 'url',)
@@ -47,7 +47,7 @@ class RandomImageAdmin(admin.ModelAdmin):
     clickable_url.short_description = "Url"
 
     class Meta:
-        model = RandomImage
+        model = Image
 
 
-admin.site.register(RandomImage, RandomImageAdmin)
+admin.site.register(Image, ImageAdmin)

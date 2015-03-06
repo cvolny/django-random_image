@@ -1,8 +1,10 @@
 from django.conf.urls import patterns, url
-from .views import index, DirectView
+from django.views.generic.detail import DetailView
+from .models import Image
+from .views import IndexDirectView
 
 
 urlpatterns = patterns('',
-    url(r'(?P<pk>\d+)$', DirectView.as_view(), name='direct'),
-    url(r'^$', index, name='index'),
+    url(r'(?P<pk>\d+)$', DetailView.as_view(model=Image), name='direct'),
+    url(r'^$', IndexDirectView.as_view(), name='index'),
 )

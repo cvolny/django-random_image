@@ -5,22 +5,22 @@ from django.db import models
 from django.db.models import Count
 
 
-class RandomManager(models.Manager):
+class ImageRandomManager(models.Manager):
     def random(self):
         count = self.aggregate(count=Count('id'))['count']
         if count < 1:
-            raise RandomImage.DoesNotExist()
+            raise Image.DoesNotExist()
         random_index = randint(0, count - 1)
         return self.all()[random_index]
 
 
-class RandomImage(models.Model):
+class Image(models.Model):
     title = models.CharField(max_length=255)
     url = models.URLField(max_length=512)
     user = models.ForeignKey(User)
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    objects = RandomManager()
+    objects = ImageRandomManager()
 
     def __str__(self):
         return u'%s' % self.title
