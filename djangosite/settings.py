@@ -67,9 +67,9 @@ USE_L10N = True
 USE_TZ = True
 USE_LIGHTBOX = True
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR', BASE_DIR), 'static')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.environ.get('OPENSHIFT_DATA_DIR', os.path.join(BASE_DIR, 'media'))
+MEDIA_ROOT = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR', BASE_DIR), 'media')
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
