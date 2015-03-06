@@ -5,3 +5,12 @@
 #random_image {
     max-width: 400px;
 }
+
+#source {
+    margin-top: 2em;
+    text-align: center;
+}
+
+.top-margin-5 {
+    margin-top: 5em;
+}

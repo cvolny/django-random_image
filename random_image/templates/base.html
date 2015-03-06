@@ -39,9 +39,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="needs-prev"><a href="{% url "index" %}">Random</a></li>
+            <li class="needs-prev"><a href="{% url "random_image:index" %}">Random</a></li>
             <li class="needs-prev"><a href="{% url "about" %}">About</a></li>
-            <li class="prev needs-prev"><a href="/">Back</a></li>
+            <li class="prev needs-prev"><a href="{% url "random_image:index" %}">Back</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

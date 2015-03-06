@@ -20,5 +20,8 @@
             <a id="current" class="pull-right" href="/{{ object.id }}" title="permalink"><img src="{% static "icons/link.png" %}" alt="permalink" /></a>
             <h2>{{ object.title }}</h2>
         </div>
+        <div id="source" class="text-muted">
+            <p><label for="source_link">Image Source:</label> <a id="source_link" href="{{ object.url }}" target="_blank" class="external">{{ object.url_site }}</a></p>
+        </div>
     </div>
 {% endblock %}

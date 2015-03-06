@@ -8,7 +8,7 @@ from django.conf import settings
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^about$', 'django.contrib.flatpages.views.flatpage', {'url': '/about'}, name='about'),
-    url(r'^', include('random_image.urls')),
+    url(r'^', include("random_image.urls", app_name="random_image", namespace="random_image")),
 )
 
 

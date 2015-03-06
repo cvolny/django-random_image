@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core import urlresolvers
 from django.contrib import admin
 from .models import RandomImage
 
@@ -15,14 +16,35 @@ if settings.USE_LIGHTBOX:
 class RandomImageAdmin(admin.ModelAdmin):
     change_list_template = CHANGE_LIST_TEMPLATE
     change_form_template = CHANGE_FORM_TEMPLATE
-    fields = ('id', 'title', 'url')
-    readonly_fields = ('id',)
-    list_display = ('title', 'timestamp', 'clickable_url')
+    fields = ('id', 'user_link', 'title', 'url',)
+    readonly_fields = ('id', 'user_link', 'title_link',)
+    list_display = ('id', 'title_link', 'user_link', 'timestamp', 'clickable_url',)
+
+    def save_model(self, request, obj, form, change):
+        obj.user = request.user
+        obj.save()
+
+    def title_link(self, obj):
+        return '<a href="%s">%s</a>' % (
+            urlresolvers.reverse('random_image:direct', args=(obj.id,)),
+            obj.title,
+        )
+    title_link.allow_tags = True
+    title_link.short_description = "Title"
+
+    def user_link(self, obj):
+        return '<a href="%s">%s</a>' % (
+            urlresolvers.reverse('admin:auth_user_change', args=(obj.user.id,)),
+            obj.user
+        )
+    user_link.allow_tags = True
+    user_link.short_description = "User"
 
     def clickable_url(self, obj):
         url_attrs = IMG_URL_ATTRS % (obj.id, obj.title)
         return '<a href="%s" %s>%s</a>' % (obj.url, url_attrs, obj.url)
     clickable_url.allow_tags = True
+    clickable_url.short_description = "Url"
 
     class Meta:
         model = RandomImage

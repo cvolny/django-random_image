@@ -7,8 +7,11 @@ TEMPLATE_VIEW_IMAGE = 'random_image/view_image.html'
 
 
 def index(request):
-    img = RandomImage.objects.random()
-    return render(request, TEMPLATE_VIEW_IMAGE, {'object': img})
+    try:
+        img = RandomImage.objects.random()
+        return render(request, TEMPLATE_VIEW_IMAGE, {'object': img})
+    except RandomImage.DoesNotExist:
+        return render(request, "404.html")
 
 
 class DirectView(generic.DetailView):

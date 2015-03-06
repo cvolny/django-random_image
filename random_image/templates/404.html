@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block page-title %}
+    Not Found!
+{% endblock %}
+{% block page_header %}
+    Resource Not Found!
+{% endblock %}
+{% block page_content %}
+    <div class="text-center">
+        <div class="top-margin-5">
+            <p>Sorry, the resource your requested was not found.</p>
+        </div>
+        <img src="{% static "icons/404.png" %}" alt="Not Found" />
+    </div>
+{% endblock %}
