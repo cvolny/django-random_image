@@ -7,7 +7,6 @@ ON_OPENSHIFT = 'OPENSHIFT_REPO_DIR' in os.environ
 
 DEBUG = not ON_OPENSHIFT
 TEMPLATE_DEBUG = DEBUG
-COMPRESS_ENABLED = not DEBUG
 ALLOWED_HOSTS = ('localhost', 'python33-thevolny.rhcloud.com', 'randomdick.pics')
 
 INSTALLED_APPS = (
@@ -37,8 +36,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'djangosite.urls'
 WSGI_APPLICATION = 'djangosite.wsgi.application'
+ROOT_URLCONF = 'djangosite.urls'
 if ON_OPENSHIFT:
     DATABASES = {
         'default': {
@@ -67,14 +66,17 @@ USE_L10N = True
 USE_TZ = True
 USE_LIGHTBOX = True
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR', BASE_DIR), 'static')
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR', BASE_DIR), 'media')
+STATIC_ROOT = os.path.join(os.environ.get('OPENSHIFT_REPO_DIR', BASE_DIR), 'static')
+MEDIA_URL = '/static/media/'
+MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
+COMPRESS_ENABLED = not DEBUG
+COMPRESS_OUTPUT_DIR = "cache"
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
+
 
 default_keys = {'SECRET_KEY': 'z^jvcflogam45zw)+h*@nhh%$h#gnr!*agx_rkm=yfdl10(jtm'}
 use_keys = default_keys
