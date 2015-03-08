@@ -2,8 +2,5 @@ Django==1.7
 Pillow==2.7.0
 -e git://github.com/jezdez/django-appconf.git@v1.0.1#egg=appconfig
 django-compressor==1.4
-django-jquery==1.9.1
-django-jquery-lightbox==2.6
-django-jquery-ui==1.10.3.1
 six==1.9.0
 sorl-thumbnail==12.2
