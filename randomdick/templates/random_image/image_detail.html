@@ -5,20 +5,23 @@
     #{{ object.id }}
 {% endblock %}
 {% block page_header %}
-    Random Dick Pic #{{ object.id }}!
+    <a id="current" class="pull-right" href="/{{ object.id }}" title="permalink"><img src="{% static "icons/link.png" %}" alt="permalink" /></a>
+    #{{ object.id }}: {{ object.title }}
 {% endblock %}
 {% block page_content %}
     <div id="random_image_block" class="center-block">
-        <div id="image_wrapper">
+        <div id="image_wrapper" class="center-block text-center">
             <a href="/?prev={{ object.id }}">
+                {% block image %}
                 {% thumbnail object.url "400" as img %}
                 <img id="random_image" src="{{ img.url }}" alt="{{ object.title }}" />
                 {% endthumbnail %}
+                {% endblock %}
             </a>
         </div>
         <div id="caption_wrapper">
-            <a id="current" class="pull-right" href="/{{ object.id }}" title="permalink"><img src="{% static "icons/link.png" %}" alt="permalink" /></a>
-            <h2>{{ object.title }}</h2>
+
+            <h2 id="caption">{{ object.caption }}</h2>
         </div>
         <div id="source" class="text-muted">
             <p><label for="source_link">Image Source:</label> <a id="source_link" href="{{ object.url }}" target="_blank" class="external">{{ object.url_site }}</a></p>

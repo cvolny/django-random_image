@@ -1,26 +1,14 @@
 from urllib.parse import urlparse
-from random import randint
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import Count
-
-
-class ImageRandomManager(models.Manager):
-    def random(self):
-        count = self.aggregate(count=Count('id'))['count']
-        if count < 1:
-            raise Image.DoesNotExist()
-        random_index = randint(0, count - 1)
-        return self.all()[random_index]
 
 
 class Image(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=100)
+    caption = models.CharField(max_length=255)
     url = models.URLField(max_length=512)
     user = models.ForeignKey(User)
     timestamp = models.DateTimeField(auto_now_add=True)
-
-    objects = ImageRandomManager()
 
     def __str__(self):
         return u'%s' % self.title
