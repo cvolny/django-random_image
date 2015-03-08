@@ -47,7 +47,7 @@
             <li class="{% if current_url == about_url %}active{% endif %}">
                 <a href="{{ about_url }}">About</a>
             </li>
-            {% if previous_id %}
+            {% if exclude.id %}
             {% url "random_image:image_detail" exclude.id as previous_url %}
             <li class="highlight info">
                 <a href="{{ previous_url }}">Back</a>
