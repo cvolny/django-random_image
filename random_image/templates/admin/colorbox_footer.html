@@ -3,10 +3,25 @@
 <script src="{% static "js/jquery.colorbox.min.js" %}"></script>
 <script>
     jQuery(function() {
+
+        function isIframe() {
+            return $(this).hasClass("iframe");
+        }
+
+        function getGallery() {
+            return $(this).attr('data-gallery') || false;
+        }
+
+        function getConstraint() {
+            return (isIframe.call(this))? "90%" : false;
+        }
+
         jQuery('.colorbox').colorbox(
                 {
-                    rel: function() {
-                        return $(this).attr('data-gallery') || false;},
+                    iframe: isIframe,
+                    rel: getGallery,
+                    height: getConstraint,
+                    width: getConstraint,
                     maxHeight: "90%",
                     maxWidth: "90%"
                 }

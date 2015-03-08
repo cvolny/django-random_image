@@ -21,6 +21,14 @@ class ExcludeMixin(SingleObjectMixin):
             queryset = queryset.exclude(pk=pk)
         return queryset
 
+    def get_context_data(self, **kwargs):
+        context = super(ExcludeMixin, self).get_context_data(**kwargs)
+        context["exclude"] = {
+            'name': self.exclude_name,
+            'id': self.get_storage().get(self.exclude_name, "")
+        }
+        return context
+
 
 class CookieExcludeMixin(ExcludeMixin):
 

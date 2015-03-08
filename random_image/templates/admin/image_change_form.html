@@ -7,15 +7,13 @@
     {{ block.super }}
     {% include "admin/colorbox_footer.html" %}
     <script>
-        jQuery('.field-url a')
+        jQuery('.url a')
                 .addClass('colorbox')
                 .attr({
-                    'data-pk': function() {
-                        return jQuery(this).closest('fieldset').find('.field-id p').text();
-                    },
                     'title': function() {
                         return jQuery("#id_title").val();
                     }
                 });
+    jQuery('.field-cite a, .field-view_link a').addClass('iframe');
     </script>
 {% endblock %}

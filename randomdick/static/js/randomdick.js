@@ -1,6 +1,5 @@
-var COOKIE_EXCLUDE = "exclude";
-
 (function() {
+    var PREVIOUS_COOKIE_NAME = $('body').data("previous-name");
     // style active links and their parents
     var active = $('nav a[href="/' + location.pathname.split("/")[1] + '"]');
     active.addClass('active');
@@ -10,7 +9,7 @@ var COOKIE_EXCLUDE = "exclude";
     var currents = $("#current");
     if (currents.length) {
         var permalink = currents.first().attr("href");
-        document.cookie = COOKIE_EXCLUDE + "=" + permalink.substring(1);
+        document.cookie = PREVIOUS_COOKIE_NAME + "=" + permalink.substring(1);
 
         $(document).bind('keydown', function (e) {
             if ((e.which === 116) || (e.which === 82 && e.ctrlKey)) {
@@ -21,6 +20,9 @@ var COOKIE_EXCLUDE = "exclude";
             }
         });
     }
+
+    // highlight info
+    $('.highlight.info').effect('highlight', {color: '#ddf'}, 1000);
 
     // enable default colorbox support
     $('.colorbox').colorbox();

@@ -23,8 +23,10 @@
     <![endif]-->
   </head>
 
-  <body>
-
+  <body data-previous="{{ exclude.id }}" data-previous-name="{{ exclude.name }}">
+    {% with request.get_full_path as current_url %}
+    {% url "random_image:image_random" as random_url %}
+    {% url "about" as about_url %}
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -39,16 +41,35 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="needs-prev"><a href="{% url "random_image:image_random" %}">Random</a></li>
-            <li class="needs-prev"><a href="{% url "about" %}">About</a></li>
-            <li class="prev needs-prev"><a href="javascript:void(0)">Back</a></li>
+            <li class="{% if current_url == random_url %}active{% endif %}">
+                <a href="{{ random_url }}">Random</a>
+            </li>
+            <li class="{% if current_url == about_url %}active{% endif %}">
+                <a href="{{ about_url }}">About</a>
+            </li>
+            {% if previous_id %}
+            {% url "random_image:image_detail" exclude.id as previous_url %}
+            <li class="highlight info">
+                <a href="{{ previous_url }}">Back</a>
+            </li>
+            {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    {% endwith %}
 
     <!-- Begin page content -->
     <div class="container">
+      <div id="messages">
+      {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+      </div>
       <div class="page-header">
         <h1>{% block page_header %}Hello World!{% endblock %}</h1>
       </div>
