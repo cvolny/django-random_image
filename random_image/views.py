@@ -6,9 +6,21 @@ from django.db.models import Count
 from random import randint
 
 
-class ExcludeMixin(SingleObjectMixin):
-    __metaclass__ = ABCMeta
+class ExcludeContextMixin(SingleObjectMixin):
+
     exclude_name = "exclude"
+
+    def get_context_data(self, **kwargs):
+        context = super(ExcludeContextMixin, self).get_context_data(**kwargs)
+        context["exclude"] = {
+            'name': self.exclude_name,
+            'id': context.get(self.exclude_name, {'id': ''}).get('id', '')
+        }
+        return context
+
+
+class ExcludeMixin(ExcludeContextMixin):
+    __metaclass__ = ABCMeta
 
     @abstractmethod
     def get_storage(self):
@@ -21,17 +33,8 @@ class ExcludeMixin(SingleObjectMixin):
             queryset = queryset.exclude(pk=pk)
         return queryset
 
-    def get_context_data(self, **kwargs):
-        context = super(ExcludeMixin, self).get_context_data(**kwargs)
-        context["exclude"] = {
-            'name': self.exclude_name,
-            'id': self.get_storage().get(self.exclude_name, "")
-        }
-        return context
-
 
 class CookieExcludeMixin(ExcludeMixin):
-
     def get_storage(self):
         return self.request.COOKIES
 
@@ -53,6 +56,10 @@ class RandomMixin(SingleObjectMixin):
             return RandomMixin.get_random(queryset)
         except self.model.DoesNotExist:
             raise Http404
+
+
+class ExcludeContextDetailView(ExcludeContextMixin, DetailView):
+    pass
 
 
 class ExcludeRandomDetailView(CookieExcludeMixin, RandomMixin, DetailView):
