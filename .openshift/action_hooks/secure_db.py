@@ -2,7 +2,6 @@
 import hashlib
 import imp
 import os
-import sys
 import sqlite3
 
 # Load the openshift helper library
