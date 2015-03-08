@@ -1,36 +1,27 @@
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+var COOKIE_EXCLUDE = "exclude";
 
 (function() {
-    console.log(location.pathname);
-    $('nav a[href="/' + location.pathname.split("/")[1] + '"]:not(.prev a)').parent().addClass('active');
-    var prev = getParameterByName("prev");
-    if (prev) {
-        $('.prev a').attr('href', function (i, str) {
-            return str + prev;
-        });
-        $('.prev').effect("highlight", {"color": "#d9edf7"}, 1500);
-    } else {
-        $('.prev').hide();
-    }
-    var currentUrl = $('#current');
-    if (currentUrl.length) {
-        var current = currentUrl.attr("href").substr(1);
-        $('.needs-prev a').attr('href', function (i, str) {
-            return str + '?prev=' + current;
-        });
+    // style active links and their parents
+    var active = $('nav a[href="/' + location.pathname.split("/")[1] + '"]');
+    active.addClass('active');
+    active.parent().addClass('active');
 
-        $(document).bind('keydown keyup', function (e) {
+    // get the permalink, override F5 to go to index
+    var currents = $("#current");
+    if (currents.length) {
+        var permalink = currents.first().attr("href");
+        document.cookie = COOKIE_EXCLUDE + "=" + permalink.substring(1);
+
+        $(document).bind('keydown', function (e) {
             if ((e.which === 116) || (e.which === 82 && e.ctrlKey)) {
-                var url = '/?prev=' + current;
-                console.log("override F5, go to '" + url + "'.");
-                window.location = url;
+                var index = permalink.substring(0, permalink.lastIndexOf("/"));
+                console.log("override F5, go to '" + index + "'.");
+                window.location = index;
                 return false;
             }
         });
     }
+
+    // enable default colorbox support
+    $('.colorbox').colorbox();
 })();
