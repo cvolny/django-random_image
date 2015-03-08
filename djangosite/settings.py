@@ -1,5 +1,4 @@
 import os
-import imp
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -65,7 +64,7 @@ APPEND_SLASH = False
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-USE_LIGHTBOX = True
+USE_COLORBOX = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.environ.get('OPENSHIFT_REPO_DIR', BASE_DIR), 'wsgi', 'static')
 MEDIA_URL = '/static/media/'

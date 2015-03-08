@@ -1,0 +1,21 @@
+{% extends "admin/change_form.html" %}
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'admin/colorbox_extrahead.html' %}
+{% endblock %}
+{% block footer %}
+    {{ block.super }}
+    {% include "admin/colorbox_footer.html" %}
+    <script>
+        jQuery('.field-url a')
+                .addClass('colorbox')
+                .attr({
+                    'data-pk': function() {
+                        return jQuery(this).closest('fieldset').find('.field-id p').text();
+                    },
+                    'title': function() {
+                        return jQuery("#id_title").val();
+                    }
+                });
+    </script>
+{% endblock %}

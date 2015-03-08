@@ -1,0 +1,15 @@
+{% load staticfiles %}
+<script src="{% static "js/jquery.min.js" %}"></script>
+<script src="{% static "js/jquery.colorbox.min.js" %}"></script>
+<script>
+    jQuery(function() {
+        jQuery('.colorbox').colorbox(
+                {
+                    rel: function() {
+                        return $(this).attr('data-gallery') || false;},
+                    maxHeight: "90%",
+                    maxWidth: "90%"
+                }
+        );
+    });
+</script>
